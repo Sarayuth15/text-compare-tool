@@ -13,7 +13,7 @@ const BASE_CLASSES =
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary:
-    "bg-accent text-accent-foreground hover:bg-accent/85 disabled:hover:bg-accent",
+    "bg-accent text-accent-foreground hover:bg-accent-hover disabled:hover:bg-accent",
   secondary:
     "border border-border bg-surface text-foreground hover:bg-background disabled:hover:bg-surface",
 };
