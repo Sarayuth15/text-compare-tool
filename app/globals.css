@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f8fa;
+  --surface: #ffffff;
+  --foreground: #18181b;
+  --muted: #5f6370;
+  --border: #dfe1e6;
+  --accent: #2563eb;
+  --accent-foreground: #ffffff;
+
+  --added-bg: #e6f6ec;
+  --added-fg: #116329;
+  --removed-bg: #fdecec;
+  --removed-fg: #a1161e;
+  --changed-bg: #fff4d6;
+  --changed-fg: #7a4d00;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0d0f12;
+    --surface: #16191e;
+    --foreground: #e8e9ec;
+    --muted: #9a9fab;
+    --border: #2a2e36;
+    --accent: #5b8def;
+    --accent-foreground: #0d0f12;
+
+    --added-bg: #12301d;
+    --added-fg: #7ee2a0;
+    --removed-bg: #3a1518;
+    --removed-fg: #ff9a9f;
+    --changed-bg: #352a0c;
+    --changed-fg: #f5cf6b;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-added-bg: var(--added-bg);
+  --color-added-fg: var(--added-fg);
+  --color-removed-bg: var(--removed-bg);
+  --color-removed-fg: var(--removed-fg);
+  --color-changed-bg: var(--changed-bg);
+  --color-changed-fg: var(--changed-fg);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --radius-base: 5px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
