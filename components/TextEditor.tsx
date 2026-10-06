@@ -13,8 +13,15 @@ interface TextEditorProps {
   error?: string | null;
 }
 
+/** Counts lines without allocating an array, so typing in huge texts stays cheap. */
 function countLines(text: string): number {
-  return text.split("\n").length;
+  let count = 1;
+  let index = text.indexOf("\n");
+  while (index !== -1) {
+    count++;
+    index = text.indexOf("\n", index + 1);
+  }
+  return count;
 }
 
 export default function TextEditor({

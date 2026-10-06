@@ -79,7 +79,13 @@ export default function TextCompare() {
       options,
       result: compareTexts(texts.original, texts.modified, options),
     });
-    resultRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    resultRef.current?.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "nearest",
+    });
   }
 
   function handleSwitch() {

@@ -1,5 +1,11 @@
-import type { CSSProperties } from "react";
+"use client";
+
+import { useState, type CSSProperties } from "react";
+import Button from "@/components/Button";
 import type { DiffLine, DiffLineType, DiffSide } from "@/lib/diff";
+
+/** Rows rendered per batch; keeps huge results from blocking the page. */
+const RENDER_BATCH_SIZE = 2000;
 
 interface DiffViewerProps {
   lines: DiffLine[];
@@ -29,6 +35,15 @@ function getLineNumberDigits(lines: DiffLine[]): number {
 }
 
 export default function DiffViewer({ lines }: DiffViewerProps) {
+  const [visibleCount, setVisibleCount] = useState(RENDER_BATCH_SIZE);
+  const [batchedLines, setBatchedLines] = useState(lines);
+  if (lines !== batchedLines) {
+    setBatchedLines(lines);
+    setVisibleCount(RENDER_BATCH_SIZE);
+  }
+
+  const visibleLines = lines.slice(0, visibleCount);
+  const hiddenCount = lines.length - visibleLines.length;
   const lineNumberWidth = {
     "--line-number-width": `${getLineNumberDigits(lines)}ch`,
   } as CSSProperties;
@@ -46,7 +61,7 @@ export default function DiffViewer({ lines }: DiffViewerProps) {
         <div className="px-3 py-2">Modified</div>
       </div>
       <div>
-        {lines.map((line, index) => (
+        {visibleLines.map((line, index) => (
           <div
             key={index}
             className="grid grid-cols-1 [contain-intrinsic-size:auto_1.5rem] [content-visibility:auto] lg:grid-cols-2 lg:divide-x lg:divide-border"
@@ -61,6 +76,25 @@ export default function DiffViewer({ lines }: DiffViewerProps) {
           </div>
         ))}
       </div>
+      {hiddenCount > 0 && (
+        <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border px-3 py-2 font-sans text-xs text-muted">
+          <span>
+            Showing {visibleLines.length.toLocaleString()} of{" "}
+            {lines.length.toLocaleString()} lines
+          </span>
+          <div className="flex gap-2">
+            <Button
+              size="sm"
+              onClick={() => setVisibleCount((count) => count + RENDER_BATCH_SIZE)}
+            >
+              Show {Math.min(RENDER_BATCH_SIZE, hiddenCount).toLocaleString()} more
+            </Button>
+            <Button size="sm" onClick={() => setVisibleCount(lines.length)}>
+              Show all
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

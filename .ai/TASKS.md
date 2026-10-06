@@ -48,9 +48,9 @@
 
 ## Phase 7 — Quality
 
-- [ ] ESLint
-- [ ] TypeScript check
-- [ ] Production build
-- [ ] Manual testing
-- [ ] Accessibility review
-- [ ] Performance review
+- [x] ESLint
+- [x] TypeScript check
+- [x] Production build
+- [x] Manual testing
+- [x] Accessibility review
+- [x] Performance review
