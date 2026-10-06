@@ -48,9 +48,23 @@ and:
 
 npm run build
 
-Fix all errors.
+and:
+
+npm test
+
+Fix all errors and failing tests.
+
+`npm test` runs the unit tests (Vitest) and then the end-to-end tests
+(Playwright). First-time setup for end-to-end tests:
+
+npx playwright install chromium
 
 ## Phase 5 — Test
+
+Add or update automated tests for new or changed behavior:
+
+- Comparison logic in `lib/` → unit tests in `lib/*.test.ts`
+- User-facing behavior → end-to-end tests in `e2e/`
 
 Test:
 
